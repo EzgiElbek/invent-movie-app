@@ -26,7 +26,6 @@ const initialState: MovieState = {
   error: null,
 };
 
-//GET MOVIES
 export const fetchMovies = createAsyncThunk("movies/fetchMovies",
   async ({ search, page, type, year } : { search: string; page: number; type?: string; year?: string }) => {
     const params = new URLSearchParams({ apikey: API_KEY });
@@ -41,7 +40,6 @@ export const fetchMovies = createAsyncThunk("movies/fetchMovies",
   }
 );
 
-//GET MOVIE DETAIL
 export const fetchMovieDetails = createAsyncThunk("movies/fetchMovieDetails",
   async (imdbID: string) => {
     const params = new URLSearchParams({ apikey: API_KEY, i: imdbID, plot: "full" });

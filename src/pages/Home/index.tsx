@@ -10,16 +10,16 @@ import "./style.scss";
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const getSearch = useSelector((state: RootState) => state.movies.searchMovie);
-  const getSearchYear = useSelector((state: RootState) => state.movies.searchYear);
-  const getPage = useSelector((state: RootState) => state.movies.currentPage);
-  const getMovies = useSelector((state: RootState) => state.movies);
+  const searchWord = useSelector((state: RootState) => state.movies.searchMovie);
+  const searchYear = useSelector((state: RootState) => state.movies.searchYear);
+  const currentPage = useSelector((state: RootState) => state.movies.currentPage);
+  const allMovieList = useSelector((state: RootState) => state.movies);
   const selectedType = useSelector((state: RootState) => state.movies.selectedType);
   
   const tabTypes = ["movie", "series", "episode"];
 
   useEffect(() => {
-    dispatch(fetchMovies({ search: getSearch, page: getPage, type: selectedType, year: getSearchYear }));
+    dispatch(fetchMovies({ search: searchWord, page: currentPage, type: selectedType, year: searchYear }));
   }, [dispatch, selectedType]);
 
   return (
@@ -40,8 +40,8 @@ const Home = () => {
           <Search/>
         </Box>
       </div>
-      <div className={getMovies?.movies?.length > 0 ? "home__body" : "home__not-found"}>
-        {getMovies?.movies?.length > 0 ? (
+      <div className={allMovieList?.movies?.length > 0 ? "home__body" : "home__not-found"}>
+        {allMovieList?.movies?.length > 0 ? (
           <MovieList/>
         ) : (
           <div className="home__not-found-wrapper">

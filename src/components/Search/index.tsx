@@ -1,15 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchMovie, setSearchYear, fetchMovies, setCurrentPage } from "../../redux/movieSlice";
 import { RootState, AppDispatch } from "../../redux/store";
+import debounce from "lodash/debounce";
 import { FaSearch } from "react-icons/fa";
 import "./style.scss";
 
 const Search = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const getSearch = useSelector((state: RootState) => state.movies.searchMovie);
-  const getYear = useSelector((state: RootState) => state.movies.searchYear);
-  const getType = useSelector((state: RootState) => state.movies.selectedType);
+  const searchName = useSelector((state: RootState) => state.movies.searchMovie);
+  const searchYear = useSelector((state: RootState) => state.movies.searchYear);
+  const type = useSelector((state: RootState) => state.movies.selectedType);
   const isFirstRender = useRef(true);
 
   const changeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,19 +23,27 @@ const Search = () => {
     dispatch(setCurrentPage(1));
   };
 
+  const debouncedFetchMovies = useCallback(
+    debounce((search: string, year: string) => {
+      dispatch(fetchMovies({ search, page: 1, type: type, year }));
+    }, 500),
+    [dispatch, type]
+  );
+
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
 
-    if (getSearch.length > 2 || getYear.length > 2) {
-      const delaySearch = setTimeout(() => {
-        dispatch(fetchMovies({ search: getSearch, page: 1, type: getType, year: getYear }));
-      }, 500);
-      return () => clearTimeout(delaySearch);
+    if (searchName.length > 2 || searchYear.length > 2) {
+      debouncedFetchMovies(searchName, searchYear);
     }
-  }, [getSearch, getYear, dispatch]);
+
+    return () => {
+      debouncedFetchMovies.cancel();
+    };
+  }, [searchName, searchYear, dispatch, debouncedFetchMovies]);
 
   return (
     <div className="search">
@@ -43,7 +52,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Search by name"
-          value={getSearch}
+          value={searchName}
           onChange={changeSearch}
           className="search__wrapper-input"
         />
@@ -51,7 +60,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Search by year"
-          value={getYear}
+          value={searchYear}
           onChange={changeYear}
           className="search__wrapper-input"
         />

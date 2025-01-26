@@ -9,9 +9,9 @@ const MoviePagination = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const totalResults = useSelector((state: RootState) => state.movies.totalResults);
-  const getSearch = useSelector((state: RootState) => state.movies.searchMovie);
-  const getCurrentPage = useSelector((state: RootState) => state.movies.currentPage);
-  const getType = useSelector((state: RootState) => state.movies.selectedType);
+  const searchMovie = useSelector((state: RootState) => state.movies.searchMovie);
+  const currentPage = useSelector((state: RootState) => state.movies.currentPage);
+  const type = useSelector((state: RootState) => state.movies.selectedType);
   const isFirstRender = useRef(true);
 
   const pageCount: number = Math.ceil(totalResults / 10);
@@ -22,14 +22,14 @@ const MoviePagination = () => {
       return;
     }
     
-    dispatch(fetchMovies({ page: getCurrentPage, search: getSearch, type: getType }));
-  }, [getCurrentPage, dispatch, getSearch]);
+    dispatch(fetchMovies({ page: currentPage, search: searchMovie, type: type }));
+  }, [currentPage, dispatch, searchMovie]);
 
   return (
     <div className="pagination">
       <Pagination
         count={pageCount}
-        page={getCurrentPage}
+        page={currentPage}
         onChange={(_, page: number) => dispatch(setCurrentPage(page))}
         variant="outlined"
         shape="rounded"
