@@ -1,36 +1,57 @@
 .home {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
     height: 100vh;
     background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
-    display: grid;
 
     &__header {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        margin: 20px 0;
+        margin: 10px 85px;
 
         &-wrapper {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-evenly;
-            gap: 35px;
-
-            &-tab {
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-
-                &:hover {
-                    color: rgb(32, 32, 32);
-                    transform: scale(1.02);
-                }
-            }
         }
     }
 
     &__body {
         margin: 0 auto;
+    }
+
+    &__not-found {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        
+        &-wrapper {
+            background-color: #ffffff8a;
+            padding: 100px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 200px;
+            color: #333;
+
+            &-icon {
+                font-size: 40px;
+            }
+
+            &-title {
+                font-size: 20px;
+                margin-top: 10px;
+            }
+                
+            &-subtitle{
+                font-size: 18px;
+            }
+        }
     }
 }

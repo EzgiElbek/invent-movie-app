@@ -1,35 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Pagination } from "@mui/material";
-import { fetchMovies } from "../../redux/movieSlice";
+import { fetchMovies, setCurrentPage } from "../../redux/movieSlice";
 import { RootState, AppDispatch } from "../../redux/store";
+import { Pagination } from "@mui/material";
 import './style.scss'
 
 const MoviePagination = () => {
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
   const dispatch = useDispatch<AppDispatch>();
   const totalResults = useSelector((state: RootState) => state.movies.totalResults);
   const getSearch = useSelector((state: RootState) => state.movies.searchMovie);
+  const getCurrentPage = useSelector((state: RootState) => state.movies.currentPage);
+  const getType = useSelector((state: RootState) => state.movies.selectedType);
+  const isFirstRender = useRef(true);
 
   const pageCount: number = Math.ceil(totalResults / 10);
 
   useEffect(() => {
-    if (currentPage !== 1) {
-      dispatch(fetchMovies({ page: currentPage, search: getSearch }));
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-  }, [currentPage, dispatch, getSearch]);
+    
+    dispatch(fetchMovies({ page: getCurrentPage, search: getSearch, type: getType }));
+  }, [getCurrentPage, dispatch, getSearch]);
 
   return (
     <div className="pagination">
       <Pagination
         count={pageCount}
-        page={currentPage}
-        onChange={(_, page: number) => setCurrentPage(page)}
+        page={getCurrentPage}
+        onChange={(_, page: number) => dispatch(setCurrentPage(page))}
         variant="outlined"
         shape="rounded"
-        color="primary"
+        color="secondary"
         size="medium"
         showFirstButton
         showLastButton

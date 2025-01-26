@@ -10,15 +10,15 @@ interface CardProps {
 }
 
 const Card = ({ imdbID, name, year, poster, type }: CardProps) => {
-    
+
   return (
     <div className="card">
-      <Link to={`/movie/${imdbID}`} className="card-link">
-        <img src={poster ? poster : "/placeholder.jpg"} alt={name} className="card-img" />
-        <div className="card-info">
-          <span className="card-title">{name}</span>
-          <span className="card-year">{year}</span>
-          <span className="card-type">{type.toUpperCase()}</span>
+      <Link to={`/movie/${imdbID}`} className="card__wrapper">
+        <img src={poster ? poster : "/placeholder.jpg"} alt={name} className="card__wrapper-img" />
+        <div className="card__wrapper-info">
+          <span className="card__wrapper-info-title">{name}</span>
+          <span className="card__wrapper-info-year">{year}</span>
+          <span className="card__wrapper-info-type">{type.toUpperCase()}</span>
         </div>
       </Link>
     </div>

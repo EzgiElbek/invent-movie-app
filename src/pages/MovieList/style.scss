@@ -1,7 +1,12 @@
-.movie-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
+.movie-wrapper {
+    background-color: #ffffff8a;
+    padding: 40px 40px 10px 40px;
+    border-radius: 10px;
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
 }

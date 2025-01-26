@@ -8,7 +8,8 @@ interface MovieState {
   movies: any[];
   totalResults: number;
   searchMovie: string;
-  typeMovie: string;
+  searchYear: string;
+  selectedType: string;
   currentPage: number;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
@@ -16,12 +17,13 @@ interface MovieState {
 
 const initialState: MovieState = {
   movies: [],
+  totalResults: 0,
+  searchYear: "",
+  searchMovie: "Pokemon",
+  selectedType: "",
+  currentPage: 1,
   status: "idle",
   error: null,
-  totalResults: 0,
-  searchMovie: "Pokemon",
-  typeMovie: "",
-  currentPage: 1
 };
 
 //GET MOVIES
@@ -54,8 +56,11 @@ const movieSlice = createSlice({name: "movies", initialState,
     setSearchMovie(state, action) {
       state.searchMovie = action.payload;
     },
-    setType(state, action) {
-      state.typeMovie = action.payload;
+    setSearchYear(state, action) {
+      state.searchYear = action.payload;
+    },
+    setSelectedType(state, action) {
+      state.selectedType = action.payload;
     },
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
@@ -68,11 +73,9 @@ const movieSlice = createSlice({name: "movies", initialState,
         state.status = "loading";
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
-        if (state.totalResults !== parseInt(action.payload.totalResults) || state.movies.length !== action.payload.Search?.length) {
           state.status = "succeeded";
           state.movies = action.payload.Search || [];
           state.totalResults = parseInt(action.payload.totalResults) || 0;
-        }
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         state.status = "failed";
@@ -87,5 +90,5 @@ const movieSlice = createSlice({name: "movies", initialState,
   }
 });
 
-export const { setSearchMovie, setType, setCurrentPage } = movieSlice.actions;
+export const { setSearchMovie, setSearchYear, setSelectedType, setCurrentPage } = movieSlice.actions;
 export default movieSlice.reducer;
