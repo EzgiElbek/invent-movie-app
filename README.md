@@ -22,12 +22,12 @@ This project was bootstrapped with [Create React App](https://create-react-app.d
 - **Lodash** (Utility functions)  
 - **SASS/SCSS** (Styling)  
 
-## 🛠 Installation & Setup  
+## Installation & Setup  
 
 Clone the repository and install dependencies:
 
 ```sh
-git clone https://github.com/your-username/invent-movie-app.git
+git clone https://github.com/EzgiElbek/invent-movie-app.git
 cd invent-movie-app
 npm install
 ```
