@@ -1,46 +1,67 @@
-# Getting Started with Create React App
+# Invent Movie App  
+**React + TypeScript** movie discovery application powered by the **OMDb API**.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
 
-## Available Scripts
+This project was bootstrapped with [Create React App](https://create-react-app.dev/).  
 
-In the project directory, you can run:
+### Features  
+**Movie Search & Listing** – Search for movies and TV series using OMDb API.  
+**Movie Details** – View detailed information about a selected movie or series.  
+**Pagination** – Display results with **10 movies per page**.  
+**Filters** – Filter movies by **release year** and **type (movie, series, episode)**.  
+**Responsive UI** – Styled with **Material UI & SCSS** for a smooth experience.  
 
-### `npm start`
+## Technologies Used  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React 18** (CRA with TypeScript)  
+- **Redux Toolkit** (State Management)  
+- **React Router** (Client-side Routing)  
+- **Axios** (API Requests)  
+- **Material UI** (UI Components)  
+- **Lodash** (Utility functions)  
+- **SASS/SCSS** (Styling)  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠 Installation & Setup  
 
-### `npm test`
+Clone the repository and install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+git clone https://github.com/your-username/invent-movie-app.git
+cd invent-movie-app
+npm install
+```
 
-### `npm run build`
+### Run the App  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the development server:  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app will be available at **[http://localhost:3000](http://localhost:3000)**.
 
-### `npm run eject`
+### Build for Production  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+npm run build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This will create an optimized production-ready build inside the `build` folder.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deployment  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To deploy the app, use a platform like **Vercel, Netlify, or GitHub Pages**.
 
-## Learn More
+```sh
+npm run build
+```
+Upload the `build` folder to your hosting provider.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Useful Links  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [OMDb API Documentation](https://www.omdbapi.com/)  
+- [React Documentation](https://reactjs.org/)  
+- [Redux Toolkit](https://redux-toolkit.js.org/)  
+- [Material UI](https://mui.com/)
